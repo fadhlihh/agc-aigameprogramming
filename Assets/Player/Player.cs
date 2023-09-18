@@ -7,9 +7,17 @@ public class Player : MonoBehaviour
     private Rigidbody _rigidBody;
     [SerializeField]
     private float _speed;
+    [SerializeField]
+    private Transform _camera;
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -17,7 +25,10 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 movementDirection = new Vector3(horizontal,0,vertical);
+        Vector3 horizontalDirection = horizontal * _camera.right;
+        Vector3 verticalDirection = vertical * _camera.forward;
+
+        Vector3 movementDirection = horizontalDirection + verticalDirection;
         _rigidBody.velocity = movementDirection * _speed * Time.fixedDeltaTime;
     }
 }
