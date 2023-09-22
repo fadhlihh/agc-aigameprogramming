@@ -6,7 +6,9 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class PickableManager : MonoBehaviour
 {
     [SerializeField]
-    private Player _player; 
+    private Player _player;
+    [SerializeField]
+    private ScoreManager _scoreManager;
 
     private List<Pickable> _pickableList = new List<Pickable>();
 
@@ -27,6 +29,10 @@ public class PickableManager : MonoBehaviour
 
     private void OnPickablePicked(Pickable pickable)
     {
+        if (_scoreManager != null)
+        {
+            _scoreManager.AddScore(pickable.Score);
+        }
         if (pickable.PickableType == PickableType.PowerUp)
         {
             _player?.PickPowerUp();

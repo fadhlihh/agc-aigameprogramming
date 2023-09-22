@@ -507,3 +507,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickableType: 1
+  Score: 10
