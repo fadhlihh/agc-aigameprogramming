@@ -7,8 +7,6 @@ public class Pickable : MonoBehaviour
 {
     [SerializeField]
     public PickableType PickableType;
-    [SerializeField]
-    public int Score;
     public Action<Pickable> OnPicked;
     private void OnTriggerEnter(Collider other)
     {

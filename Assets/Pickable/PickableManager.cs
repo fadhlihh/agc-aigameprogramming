@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.SceneManagement;
 
 public class PickableManager : MonoBehaviour
 {
@@ -25,13 +25,14 @@ public class PickableManager : MonoBehaviour
             _pickableList.Add(pickableObjects[i]);
             pickableObjects[i].OnPicked += OnPickablePicked;
         }
+        _scoreManager.SetMaxScore(_pickableList.Count);
     }
 
     private void OnPickablePicked(Pickable pickable)
     {
         if (_scoreManager != null)
         {
-            _scoreManager.AddScore(pickable.Score);
+            _scoreManager.AddScore(1);
         }
         if (pickable.PickableType == PickableType.PowerUp)
         {
@@ -41,7 +42,7 @@ public class PickableManager : MonoBehaviour
         Destroy(pickable.gameObject);
         if (_pickableList.Count <= 0)
         {
-            Debug.Log("Win");
+            SceneManager.LoadScene("WinScreen");
         }
     }
 }
