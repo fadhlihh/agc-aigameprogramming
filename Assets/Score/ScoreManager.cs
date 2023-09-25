@@ -9,10 +9,11 @@ public class ScoreManager : MonoBehaviour
     private TMP_Text _scoreText;
 
     private int _score;
+    private int _maxScore;
 
-    private void Start()
+    public void SetMaxScore(int value)
     {
-        _score = 0;
+        _maxScore = value;
         UpdateUI();
     }
 
@@ -24,6 +25,13 @@ public class ScoreManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        _scoreText.text = "Score: " + _score;
+        _scoreText.text = "Score: " + _score + " / " + _maxScore;
+    }
+
+    private void Start()
+    {
+        _score = 0;
+        _maxScore = 0;
+        UpdateUI();
     }
 }
